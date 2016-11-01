@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+
+<project name="mms_compile" default="copyfile" basedir=".">
+
+	<property name="src" value="../src"/>
+	<property name="classpath" value=".;../jar/commons-dbcp-1.2.1.jar;../jar/commons-pool-1.2.jar;../jar/dom4j-1.6.1.jar;../jar/log4j-1.2.15.jar;../jar/mina-core-1.1.7.jar"/>
+	<property name="lib" value="../jar"/>
+	<property name="jxt" value="../javaExtensions"/>
+
+	<property name="server" value="./server"/>
+	<property name="bin" value="./server/bin"/>
+	<property name="jar" value="./server/jar"/>
+	<property name="log" value="./server/logs"/>
+	<property name="ext" value="./server/javaExtensions"/>
+
+	<target name="clean">
+		<delete dir="${bin}"/>
+		<delete dir="${ext}"/>
+		<delete dir="${jar}"/>
+		<delete dir="${log}">
+			<fileset dir="${server}" includes="*.*"/>
+		</delete>
+	</target>
+
+	<target name="init">
+		<mkdir dir="${bin}"/>
+		<mkdir dir="${jar}"/>
+		<mkdir dir="${log}"/>
+		<mkdir dir="${ext}"/>
+	</target>
+
+	<target name="compile" depends="init">
+		<javac srcdir="${src}" destdir="${bin}" classpath="${classpath}" debug="on"/>
+	</target>
+
+	<target name="jar" depends="compile">
+		<jar destfile="${jar}/altraserver.jar" basedir="${bin}"/>
+		<delete dir="${bin}"/>
+	</target>
+
+	<target name="copyfile">
+		<copy todir="${jar}">
+			<fileset dir="${lib}"/>
+		</copy>
+		<copy todir="${ext}">
+			<fileset dir="${jxt}"/>
+		</copy>
+		<copy file="alsadmin.sh" todir="${server}"/>
+		<copy file="alsadmin.bat" todir="${server}"/>
+		<copy file="allalsadmin.sh" todir="${server}"/>
+		<!--<copy file="mylogging.properties" todir="${server}"/>-->
+		<copy file="config.xml" todir="${server}"/>
+		<copy file="exConfig.xml" todir="${server}"/>
+		<copy file="logConfig.xml" todir="${server}"/>
+		<copy file="wsConfig.xml" todir="${server}"/>
+	</target>
+
+</project>
