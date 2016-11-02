@@ -1,0 +1,20 @@
+	option java_package = "ench" ;
+	option java_outer_classname = "PersonFactory" ;
+	
+	message Person{
+		required int32 age = 1 ;
+		required string name = 2 ;
+		repeated string address = 3; 
+		optional string sex = 4 [default = "ÄÐ"];
+		
+		enum Phones {
+    			PHONE1 = 0;
+			PHONE2 = 1 ;
+		}
+		
+		message Student{
+			required string stu_name = 1 ;
+			required int32 stu_age = 2 ;
+		}
+	}
+

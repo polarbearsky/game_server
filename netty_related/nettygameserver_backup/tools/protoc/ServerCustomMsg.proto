@@ -1,0 +1,17 @@
+	option java_package = "com.netty.game.server.msg" ;
+	option java_outer_classname = "ServerCustomMsg" ;
+	
+	message CustomMsg{
+		required int32 cmd = 1 ;
+		repeated CustomParam params = 2; 
+		
+		message CustomParam{
+			required string paramKey = 1;
+			required ParamValue paramValues = 2;
+		}
+			
+		message ParamValue{
+			repeated string value = 1;
+		}
+	}
+

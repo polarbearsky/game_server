@@ -1,0 +1,10 @@
+	option java_package = "com.netty.game.server.msg" ;
+	option java_outer_classname = "ServerCustomMsg" ;
+	
+	message CustomMsg{
+		required int32 type = 1 ;
+		required int32 action = 2;
+		required string cmd = 3;
+		optional bytes params = 4; 
+	}
+
